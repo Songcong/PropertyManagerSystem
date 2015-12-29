@@ -1,0 +1,41 @@
+	   
+	    table {
+	        width: 100%;
+	        margin: 1em 0 2em;
+	        font-size: .938em;
+	        border-collapse: collapse;
+	    }
+	    select,input {
+	    	color: #000000;
+	    	color:#000000;
+	    }
+		body{ 
+			background-color:#ffffff;
+		}
+	    caption {
+	        margin: 1em 0 .7em 0;
+	        text-align: center;
+	        font-weight: bold;
+	        font-size: 120%;
+	        letter-spacing: .5px;
+	        color: #fff;
+	    }
+
+	    th {
+	        text-align:center;
+	        padding: .5em .5em;
+	        font-weight: bold;
+	        border-top: solid 3px #ccc;
+	        border-bottom: solid 1px #ccc;
+	        background: #66677c;
+	    }
+
+	    td {
+	        padding: .5em .5em;
+	        color:#663333;
+	        text-align:center;
+	        border-bottom: solid 1px #ccc;
+	    }
+		.active{
+			background:#66677c;
+		}
