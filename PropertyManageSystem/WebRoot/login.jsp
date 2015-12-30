@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'login.jsp' starting page</title>
+    <title>物业管理系统登录</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -27,21 +27,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="bootstrap-3.3.5-dist/js/jquery-1.11.3.mim.js" />
 	<link rel="stylesheet" type="text/css" href="bootstrap-3.3.5-dist/js/jquery.min.js" />
 	<script type="text/javascript" src="js/jquery-1.11.0.min.js" ></script>
+	
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/body.css"/> 
   </head>
   	
   <body>
-    ${message}
-  	<form action="loginAction!login" method="post">
-  	<label for="userinfo.username" >用户名:</label>
-  	<input type="text" name="userinfo.username" />
-  	<label for="userinfo.password">密码:</label>
-  	<input type="text" name="userinfo.password" />
-  	<img id="code" ></img><label for="code">验证码</label><input type="text" name="code" id="codeinput" />
-  	<a id="check" class="glyphicon glyphicon-remove"></a>
-  	<input type="submit" value="提交"/>
-  	<!-- <a href="<s:url action="userinfoAssign!register"/>"><input type="button"  value="注册"></a> -->
-  	</form>
-  	
+   ${message}
+<div class="container">
+	<section id="content">
+		<form action="loginAction!login" method="post">
+			<h1>用户登录</h1>
+			<div>
+				<input type="text" placeholder="用户名" required="" id="username" name="userinfo.username" />
+			</div>
+			<div>
+				<input type="password" placeholder="密码" required="" id="password" name="userinfo.password" />
+			</div>
+			<div>			
+			<span>	<input type="text" placeholder="验证码" required="" id="codeinput" name="code" style="width:60%;" /></span>									
+			<span><img id="code" style="height:30px; width:20%;" /></span>    
+			<span><a id="check" class="glyphicon glyphicon-remove" ></a>	</span>	
+			</div>			
+			 <div class="">
+				<span class="help-block u-errormessage" id="js-server-helpinfo"></span>			</div> 
+			<div>
+				<!-- <input type="submit" value="Log in" /> -->
+				<span><input type="submit" value="登录" class="btn btn-primary" id="js-btn-login"/></span>
+				
+				<span><input type="reset" value="取消" class="btn btn-primary" id="js-btn-login"/></span>
+				
+				<!-- <a href="#">Register</a> -->
+			</div>
+		</form><!-- form -->
+		 <div class="button">			
+			<a href="#">忘记密码</a>
+		</div> <!-- button -->
+	</section><!-- content -->
+</div>
+<!-- container -->  	
   	<script type="text/javascript">
   		function code(){
   			var timenow = new Date().getTime(); 

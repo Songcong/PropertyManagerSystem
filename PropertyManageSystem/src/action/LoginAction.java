@@ -22,14 +22,19 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Action(value = "loginAction", results = {
-		@Result(name = "ok", location = "/index.html"),
-		@Result(name = "no", location = "/login.jsp") })
+		@Result(name = "ok", location = "/index.jsp"),
+		@Result(name = "no", location = "/login.jsp"),
+		@Result(name="logout",location="/login.jsp")
+		})
+
 @Controller
 public class LoginAction extends ActionSupport {
 	private Userinfo userinfo;
 	private String message;
 
 	private String code;
+	
+	private String userid;
 
 	public Userinfo getUserinfo() {
 		return userinfo;
@@ -54,6 +59,16 @@ public class LoginAction extends ActionSupport {
 	public void setCode(String code) {
 		this.code = code;
 	}
+	
+	
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
 
 	@Resource(name = "loginService")
 	private LoginService loginService;
@@ -74,6 +89,11 @@ public class LoginAction extends ActionSupport {
 		}
 		if (code != null && code.equals(random)) {
 			if (list.size() > 0) {
+				Userinfo user= list.get(0);
+				ActionContext.getContext().getSession().put("username",userinfo.getUsername());
+				ActionContext.getContext().getSession().put("userid",user.getUserid());
+				
+				this.userid=String.valueOf(user.getUserid());
 				return "ok";
 			} else {
 				message = "<script>alert('用户名或密码，登陆失败')</script>";
@@ -85,6 +105,18 @@ public class LoginAction extends ActionSupport {
 			return "no";
 		}
 
+	}
+	public String logout(){
+		if (ActionContext.getContext().getSession().get("username") != null) {
+
+			 ActionContext.getContext().getSession().remove("username");
+
+		}
+		
+		
+		return "logout";
+		
+		
 	}
 
 }

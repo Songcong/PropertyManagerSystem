@@ -67,6 +67,7 @@ public class RegisterorEditAssign extends ActionSupport{
 		  
 		  ViewClass vc=new ViewClass();
 		  vc.action="userinfoAction!edit";
+		  vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑业主信息</h2></div>";
 		  registerorEditViewModel.viewclass=vc;
 		  
 		  ViewStringSet viewStringSet = new ViewStringSet(userinfo);
