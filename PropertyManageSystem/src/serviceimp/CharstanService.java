@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import service.ICharstanService;
 import dao.ICharstanDao;
 import Model.Charstan;
+
 import javax.annotation.Resource;
 
 @Service("charstanService")
@@ -27,5 +28,8 @@ public class CharstanService implements ICharstanService {
 	}
 	public void deletebyid(int id){
 		charStanDAO.deletebyid(id);
+	}
+	public List likeByProperty(String propertyName, Object value){
+		return charStanDAO.likeByProperty(propertyName, value);
 	}
 }

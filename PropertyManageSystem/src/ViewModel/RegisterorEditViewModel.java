@@ -43,7 +43,7 @@ public class RegisterorEditViewModel {
 
 
 	public RegisterorEditViewModel() {
-		// TODO Auto-generated constructor stub
+		this.viewclass=new ViewClass();
 	}
 
 

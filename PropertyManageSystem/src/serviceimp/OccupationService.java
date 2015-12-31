@@ -32,5 +32,8 @@ public class OccupationService  implements IOccupationService{
 	public void deletebyid(int id){
 		occupationDao.deletebyid(id);
 	}
+	public List likeByProperty(String propertyName, Object value){
+		return occupationDao.likeByProperty(propertyName, value);
+	}
 	
 }

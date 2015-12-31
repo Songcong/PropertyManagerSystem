@@ -29,4 +29,7 @@ public class ExpensetypeService implements IExpensetypeService {
 	public void deletebyid(int id){
 		expensetypeDAO.deletebyid(id);
 	}
+	public List likeByProperty(String propertyName, Object value){
+		return expensetypeDAO.likeByProperty(propertyName, value);
+	}
 }

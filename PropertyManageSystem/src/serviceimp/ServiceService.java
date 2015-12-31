@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 import service.IServiceService;
 import dao.IServiceDao;
-
 import Model.*;
+
 import javax.annotation.Resource;
 
 
@@ -32,6 +32,9 @@ public class ServiceService  implements IServiceService{
 	}
 	public void deletebyid(int id){
 		serviceDao.deletebyid(id);
+	}
+	public List likeByProperty(String propertyName, Object value){
+		return serviceDao.likeByProperty(propertyName, value);
 	}
 	
 	

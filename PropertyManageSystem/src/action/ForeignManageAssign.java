@@ -26,7 +26,11 @@ public class ForeignManageAssign extends ActionSupport{
 	
 	private ForeignManageViewModel cvm;
 	
-	 private String foreignId;
+	 private String foreignManageId;
+	 
+	 private String propertyName;
+	 
+	 private String value;
 	 
 	 @Resource(name = "foreignManageService")
 	private IForeignManageService foreignManageService;
@@ -41,14 +45,31 @@ public class ForeignManageAssign extends ActionSupport{
 		this.cvm = cvm;
 	}
 
-	public String getForeignId() {
-		return foreignId;
+	public String getForeignManageId() {
+		return foreignManageId;
 	}
 
-	public void setForeignId(String foreignManageId) {
-		this.foreignId = foreignManageId;
+	public void setForeignManageId(String foreignManageId) {
+		this.foreignManageId = foreignManageId;
+	}
+	
+	
+	public String getPropertyName() {
+		return propertyName;
 	}
 
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
 	
 	
 	public String add(){
@@ -58,7 +79,7 @@ public class ForeignManageAssign extends ActionSupport{
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="foreignManageAction!add";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加外来人口信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加车辆信息</h2></div>";
 		 foreignManageViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(foreignManage);
@@ -76,11 +97,11 @@ public class ForeignManageAssign extends ActionSupport{
 		
 		ForeignManageViewModel foreignManageViewModel=new ForeignManageViewModel();
 		
-		ForeignManage foreignManage = foreignManageService.edit(Integer.parseInt(foreignId));
+		ForeignManage foreignManage = foreignManageService.edit(Integer.parseInt(foreignManageId));
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="foreignManageAction!edit";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑外来人口信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑车辆信息</h2></div>";
 		 foreignManageViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(foreignManage);
@@ -103,11 +124,27 @@ public class ForeignManageAssign extends ActionSupport{
 		 ViewStringSet viewStringSet = new ViewStringSet();
 			
 			foreignManageViewModel.setList(viewStringSet.listSet(list));
+			foreignManageViewModel.viewClass.setAdd("<a class=\"glyphicon glyphicon-plus\" href=\"foreignManageAssign!add\">增加记录</a>");
 			
 			cvm = foreignManageViewModel;
 			
 			
 			return "list";
+	}
+	
+	public String likelist() throws IllegalArgumentException, IllegalAccessException, IntrospectionException{
+		 ForeignManageViewModel foreignManageViewModel=new ForeignManageViewModel();
+		 list = foreignManageService.likeByProperty(propertyName, value);
+		 
+		 ViewStringSet viewStringSet = new ViewStringSet();
+			
+			foreignManageViewModel.setList(viewStringSet.likelistSet(list));
+			
+			cvm = foreignManageViewModel;
+			
+			
+			return "list";
+		 
 	}
 	 
 	 

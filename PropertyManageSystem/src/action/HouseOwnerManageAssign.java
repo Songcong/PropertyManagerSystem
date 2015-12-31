@@ -26,7 +26,11 @@ public class HouseOwnerManageAssign extends ActionSupport{
 	
 	private HouseOwnerManageViewModel cvm;
 	
-	 private String manageId;
+	 private String houseOwnerManageId;
+	 
+	 private String propertyName;
+	 
+	 private String value;
 	 
 	 @Resource(name = "houseOwnerManageService")
 	private IHouseOwnerManageService houseOwnerManageService;
@@ -41,7 +45,31 @@ public class HouseOwnerManageAssign extends ActionSupport{
 		this.cvm = cvm;
 	}
 
+	public String getHouseOwnerManageId() {
+		return houseOwnerManageId;
+	}
 
+	public void setHouseOwnerManageId(String houseOwnerManageId) {
+		this.houseOwnerManageId = houseOwnerManageId;
+	}
+	
+	
+	public String getPropertyName() {
+		return propertyName;
+	}
+
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
 	
 	
 	public String add(){
@@ -51,7 +79,7 @@ public class HouseOwnerManageAssign extends ActionSupport{
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="houseOwnerManageAction!add";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加房屋业主管理信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加车辆信息</h2></div>";
 		 houseOwnerManageViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(houseOwnerManage);
@@ -69,11 +97,11 @@ public class HouseOwnerManageAssign extends ActionSupport{
 		
 		HouseOwnerManageViewModel houseOwnerManageViewModel=new HouseOwnerManageViewModel();
 		
-		HouseOwnerManage houseOwnerManage = houseOwnerManageService.edit(Integer.parseInt(manageId));
+		HouseOwnerManage houseOwnerManage = houseOwnerManageService.edit(Integer.parseInt(houseOwnerManageId));
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="houseOwnerManageAction!edit";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑房屋业主管理信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑车辆信息</h2></div>";
 		 houseOwnerManageViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(houseOwnerManage);
@@ -96,19 +124,27 @@ public class HouseOwnerManageAssign extends ActionSupport{
 		 ViewStringSet viewStringSet = new ViewStringSet();
 			
 			houseOwnerManageViewModel.setList(viewStringSet.listSet(list));
+			houseOwnerManageViewModel.viewClass.setAdd("<a class=\"glyphicon glyphicon-plus\" href=\"houseOwnerManageAssign!add\">增加记录</a>");
 			
 			cvm = houseOwnerManageViewModel;
 			
 			
 			return "list";
 	}
-
-	public String getManageId() {
-		return manageId;
-	}
-
-	public void setManageId(String manageId) {
-		this.manageId = manageId;
+	
+	public String likelist() throws IllegalArgumentException, IllegalAccessException, IntrospectionException{
+		 HouseOwnerManageViewModel houseOwnerManageViewModel=new HouseOwnerManageViewModel();
+		 list = houseOwnerManageService.likeByProperty(propertyName, value);
+		 
+		 ViewStringSet viewStringSet = new ViewStringSet();
+			
+			houseOwnerManageViewModel.setList(viewStringSet.likelistSet(list));
+			
+			cvm = houseOwnerManageViewModel;
+			
+			
+			return "list";
+		 
 	}
 	 
 	 

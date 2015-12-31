@@ -11,4 +11,5 @@ public interface IUserinfoDao {
 	public Userinfo findById(java.lang.Integer id);
 	public List<Userinfo> findAll();
 	public void deletebyid(int id);
+	public List likeByProperty(String propertyName, Object value);
 }

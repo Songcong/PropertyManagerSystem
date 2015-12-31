@@ -116,6 +116,21 @@ public class JobtypeDAO implements IJobtypeDao {
 		}
 	}
 
+	public List likeByProperty(String propertyName, Object value) {
+		log.debug("finding Jobtype instance with property: " + propertyName
+				+ ", value: " + value);
+		try {
+			String queryString = "from Jobtype as model where model."
+					+ propertyName + " like  '%"+value+"%'";
+			Query queryObject = getCurrentSession().createQuery(queryString);
+//			queryObject.setParameter(0, value);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
+			throw re;
+		}
+	}
+	
 	public List<Jobtype> findByJobname(Object jobname) {
 		return findByProperty(JOBNAME, jobname);
 	}

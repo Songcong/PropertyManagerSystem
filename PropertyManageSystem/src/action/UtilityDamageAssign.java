@@ -28,6 +28,10 @@ public class UtilityDamageAssign extends ActionSupport{
 	
 	 private String utilityDamageId;
 	 
+	 private String propertyName;
+	 
+	 private String value;
+	 
 	 @Resource(name = "utilityDamageService")
 	private IUtilityDamageService utilityDamageService;
 
@@ -48,7 +52,24 @@ public class UtilityDamageAssign extends ActionSupport{
 	public void setUtilityDamageId(String utilityDamageId) {
 		this.utilityDamageId = utilityDamageId;
 	}
+	
+	
+	public String getPropertyName() {
+		return propertyName;
+	}
 
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
 	
 	
 	public String add(){
@@ -58,7 +79,7 @@ public class UtilityDamageAssign extends ActionSupport{
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="utilityDamageAction!add";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加公用设备损坏信息</h2><br/></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加车辆信息</h2></div>";
 		 utilityDamageViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(utilityDamage);
@@ -80,7 +101,7 @@ public class UtilityDamageAssign extends ActionSupport{
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="utilityDamageAction!edit";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑公用设备损坏信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑车辆信息</h2></div>";
 		 utilityDamageViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(utilityDamage);
@@ -103,11 +124,27 @@ public class UtilityDamageAssign extends ActionSupport{
 		 ViewStringSet viewStringSet = new ViewStringSet();
 			
 			utilityDamageViewModel.setList(viewStringSet.listSet(list));
+			utilityDamageViewModel.viewClass.setAdd("<a class=\"glyphicon glyphicon-plus\" href=\"utilityDamageAssign!add\">增加记录</a>");
 			
 			cvm = utilityDamageViewModel;
 			
 			
 			return "list";
+	}
+	
+	public String likelist() throws IllegalArgumentException, IllegalAccessException, IntrospectionException{
+		 UtilityDamageViewModel utilityDamageViewModel=new UtilityDamageViewModel();
+		 list = utilityDamageService.likeByProperty(propertyName, value);
+		 
+		 ViewStringSet viewStringSet = new ViewStringSet();
+			
+			utilityDamageViewModel.setList(viewStringSet.likelistSet(list));
+			
+			cvm = utilityDamageViewModel;
+			
+			
+			return "list";
+		 
 	}
 	 
 	 

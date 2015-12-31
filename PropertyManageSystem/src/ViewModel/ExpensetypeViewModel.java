@@ -8,6 +8,9 @@ public class ExpensetypeViewModel {
 	
 	private String input;
 
+	public ExpensetypeViewModel() {
+		this.viewClass=new ViewClass();
+	}
 	public ViewClass getViewClass() {
 		return viewClass;
 	}

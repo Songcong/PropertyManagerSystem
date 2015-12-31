@@ -32,5 +32,8 @@ public class PublicUtilityManageService  implements IPublicUtilityManageService{
 	public void deletebyid(int id){
 		publicUtilityManageDao.deletebyid(id);
 	}
+	public List likeByProperty(String propertyName, Object value){
+		return publicUtilityManageDao.likeByProperty(propertyName, value);
+	}
 	
 }

@@ -33,4 +33,7 @@ public class UtilityDamageService  implements IUtilityDamageService{
 		utilityDamageDao.deletebyid(id);
 	}
 	
+	public List likeByProperty(String propertyName, Object value){
+		return utilityDamageDao.likeByProperty(propertyName, value);
+	}
 }

@@ -118,6 +118,21 @@ public class UtilityDetailDAO implements IUtilityDetailDao {
 			throw re;
 		}
 	}
+	
+	public List likeByProperty(String propertyName, Object value) {
+		log.debug("finding UtilityDetail instance with property: "
+				+ propertyName + ", value: " + value);
+		try {
+			String queryString = "from UtilityDetail as model where model."
+					+ propertyName + " like  '%"+value+"%'";
+			Query queryObject = getCurrentSession().createQuery(queryString);
+//			queryObject.setParameter(0, value);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
+			throw re;
+		}
+	}
 
 	public List<UtilityDetail> findByUtilityManageId(Object utilityManageId) {
 		return findByProperty(UTILITY_MANAGE_ID, utilityManageId);

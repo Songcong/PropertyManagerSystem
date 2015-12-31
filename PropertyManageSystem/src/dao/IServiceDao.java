@@ -4,6 +4,7 @@ import java.util.List;
 
 
 
+
 import Model.Service;
 
 public interface IServiceDao {
@@ -12,4 +13,5 @@ public interface IServiceDao {
 	public List findAll();
 	public void deletebyid(int id);
 	public List<Service> findByFacilitypro(Object facilitypro);
+	public List likeByProperty(String propertyName, Object value);
 }

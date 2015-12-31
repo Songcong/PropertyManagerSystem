@@ -118,6 +118,21 @@ public class ServiceDAO implements IServiceDao{
 		}
 	}
 
+	public List likeByProperty(String propertyName, Object value) {
+		log.debug("finding Service instance with property: " + propertyName
+				+ ", value: " + value);
+		try {
+			String queryString = "from Service as model where model."
+					+ propertyName + " like '%"+value+"%'";
+			Query queryObject = getCurrentSession().createQuery(queryString);
+//			queryObject.setParameter(0, value);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
+			throw re;
+		}
+	}
+	
 	public List<Service> findByFacilitypro(Object facilitypro) {
 		return findByProperty(FACILITYPRO, facilitypro);
 	}

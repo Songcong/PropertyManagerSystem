@@ -28,6 +28,10 @@ public class FitmentAssign extends ActionSupport{
 	
 	 private String fitmentId;
 	 
+	 private String propertyName;
+	 
+	 private String value;
+	 
 	 @Resource(name = "fitmentService")
 	private IFitmentService fitmentService;
 
@@ -48,7 +52,24 @@ public class FitmentAssign extends ActionSupport{
 	public void setFitmentId(String fitmentId) {
 		this.fitmentId = fitmentId;
 	}
+	
+	
+	public String getPropertyName() {
+		return propertyName;
+	}
 
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
 	
 	
 	public String add(){
@@ -58,7 +79,7 @@ public class FitmentAssign extends ActionSupport{
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="fitmentAction!add";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加房屋装修信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加车辆信息</h2></div>";
 		 fitmentViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(fitment);
@@ -80,7 +101,7 @@ public class FitmentAssign extends ActionSupport{
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="fitmentAction!edit";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑房屋装修信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑车辆信息</h2></div>";
 		 fitmentViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(fitment);
@@ -103,11 +124,27 @@ public class FitmentAssign extends ActionSupport{
 		 ViewStringSet viewStringSet = new ViewStringSet();
 			
 			fitmentViewModel.setList(viewStringSet.listSet(list));
+			fitmentViewModel.viewClass.setAdd("<a class=\"glyphicon glyphicon-plus\" href=\"fitmentAssign!add\">增加记录</a>");
 			
 			cvm = fitmentViewModel;
 			
 			
 			return "list";
+	}
+	
+	public String likelist() throws IllegalArgumentException, IllegalAccessException, IntrospectionException{
+		 FitmentViewModel fitmentViewModel=new FitmentViewModel();
+		 list = fitmentService.likeByProperty(propertyName, value);
+		 
+		 ViewStringSet viewStringSet = new ViewStringSet();
+			
+			fitmentViewModel.setList(viewStringSet.likelistSet(list));
+			
+			cvm = fitmentViewModel;
+			
+			
+			return "list";
+		 
 	}
 	 
 	 

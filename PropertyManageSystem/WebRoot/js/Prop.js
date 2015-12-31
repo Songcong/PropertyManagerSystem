@@ -67,23 +67,7 @@
     		}
     	});
     }
-   	function submitlike(){
-   		var propertyName = $('#propertyName').val();
-   		var value=$('#value').val();
-   		
-   		//alert("propertyName"+propertyName+"value"+value)
-   		/*$.ajax({
-		   		url: ${cvm.viewClass.action},
-		   		type: 'post',
-		   		data: {proertyName: propertyName,
-		   				value : value
-		   			  },
-		   		success:function(){*/
-   		$('#tables').load("carAssign!likelist",{"propertyName":propertyName,"value":value});
-   				//}
-   			  //})
-   			  
-   	}
+   	
     
    
     

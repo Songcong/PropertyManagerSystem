@@ -26,7 +26,11 @@ public class FamilyDetailAssign extends ActionSupport{
 	
 	private FamilyDetailViewModel cvm;
 	
-	 private String familyId;
+	 private String familyDetailId;
+	 
+	 private String propertyName;
+	 
+	 private String value;
 	 
 	 @Resource(name = "familyDetailService")
 	private IFamilyDetailService familyDetailService;
@@ -41,15 +45,31 @@ public class FamilyDetailAssign extends ActionSupport{
 		this.cvm = cvm;
 	}
 
-	public String getFamilyId() {
-		return familyId;
+	public String getFamilyDetailId() {
+		return familyDetailId;
 	}
 
-	public void setFamilyId(String familyId) {
-		this.familyId = familyId;
+	public void setFamilyDetailId(String familyDetailId) {
+		this.familyDetailId = familyDetailId;
 	}
-	 
+	
+	
+	public String getPropertyName() {
+		return propertyName;
+	}
 
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
 	
 	
 	public String add(){
@@ -59,7 +79,7 @@ public class FamilyDetailAssign extends ActionSupport{
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="familyDetailAction!add";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加家庭详细信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加车辆信息</h2></div>";
 		 familyDetailViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(familyDetail);
@@ -77,11 +97,11 @@ public class FamilyDetailAssign extends ActionSupport{
 		
 		FamilyDetailViewModel familyDetailViewModel=new FamilyDetailViewModel();
 		
-		FamilyDetail familyDetail = familyDetailService.edit(Integer.parseInt(familyId));
+		FamilyDetail familyDetail = familyDetailService.edit(Integer.parseInt(familyDetailId));
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="familyDetailAction!edit";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑家庭详细信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑车辆信息</h2></div>";
 		 familyDetailViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(familyDetail);
@@ -104,14 +124,29 @@ public class FamilyDetailAssign extends ActionSupport{
 		 ViewStringSet viewStringSet = new ViewStringSet();
 			
 			familyDetailViewModel.setList(viewStringSet.listSet(list));
+			familyDetailViewModel.viewClass.setAdd("<a class=\"glyphicon glyphicon-plus\" href=\"familyDetailAssign!add\">增加记录</a>");
 			
 			cvm = familyDetailViewModel;
 			
 			
 			return "list";
 	}
-
-
+	
+	public String likelist() throws IllegalArgumentException, IllegalAccessException, IntrospectionException{
+		 FamilyDetailViewModel familyDetailViewModel=new FamilyDetailViewModel();
+		 list = familyDetailService.likeByProperty(propertyName, value);
+		 
+		 ViewStringSet viewStringSet = new ViewStringSet();
+			
+			familyDetailViewModel.setList(viewStringSet.likelistSet(list));
+			
+			cvm = familyDetailViewModel;
+			
+			
+			return "list";
+		 
+	}
+	 
 	 
 	 
 	 

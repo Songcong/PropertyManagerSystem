@@ -26,7 +26,11 @@ public class PublicUtilityManageAssign extends ActionSupport{
 	
 	private PublicUtilityManageViewModel cvm;
 	
-	 private String utilityManageId;
+	 private String publicUtilityManageId;
+	 
+	 private String propertyName;
+	 
+	 private String value;
 	 
 	 @Resource(name = "publicUtilityManageService")
 	private IPublicUtilityManageService publicUtilityManageService;
@@ -41,7 +45,31 @@ public class PublicUtilityManageAssign extends ActionSupport{
 		this.cvm = cvm;
 	}
 
+	public String getPublicUtilityManageId() {
+		return publicUtilityManageId;
+	}
 
+	public void setPublicUtilityManageId(String publicUtilityManageId) {
+		this.publicUtilityManageId = publicUtilityManageId;
+	}
+	
+	
+	public String getPropertyName() {
+		return propertyName;
+	}
+
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
 	
 	
 	public String add(){
@@ -51,7 +79,7 @@ public class PublicUtilityManageAssign extends ActionSupport{
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="publicUtilityManageAction!add";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加公用设备管理信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加车辆信息</h2></div>";
 		 publicUtilityManageViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(publicUtilityManage);
@@ -69,11 +97,11 @@ public class PublicUtilityManageAssign extends ActionSupport{
 		
 		PublicUtilityManageViewModel publicUtilityManageViewModel=new PublicUtilityManageViewModel();
 		
-		PublicUtilityManage publicUtilityManage = publicUtilityManageService.edit(Integer.parseInt(utilityManageId));
+		PublicUtilityManage publicUtilityManage = publicUtilityManageService.edit(Integer.parseInt(publicUtilityManageId));
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="publicUtilityManageAction!edit";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑公用设备管理信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑车辆信息</h2></div>";
 		 publicUtilityManageViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(publicUtilityManage);
@@ -96,19 +124,27 @@ public class PublicUtilityManageAssign extends ActionSupport{
 		 ViewStringSet viewStringSet = new ViewStringSet();
 			
 			publicUtilityManageViewModel.setList(viewStringSet.listSet(list));
+			publicUtilityManageViewModel.viewClass.setAdd("<a class=\"glyphicon glyphicon-plus\" href=\"publicUtilityManageAssign!add\">增加记录</a>");
 			
 			cvm = publicUtilityManageViewModel;
 			
 			
 			return "list";
 	}
-
-	public String getUtilityManageId() {
-		return utilityManageId;
-	}
-
-	public void setUtilityManageId(String utilityManageId) {
-		this.utilityManageId = utilityManageId;
+	
+	public String likelist() throws IllegalArgumentException, IllegalAccessException, IntrospectionException{
+		 PublicUtilityManageViewModel publicUtilityManageViewModel=new PublicUtilityManageViewModel();
+		 list = publicUtilityManageService.likeByProperty(propertyName, value);
+		 
+		 ViewStringSet viewStringSet = new ViewStringSet();
+			
+			publicUtilityManageViewModel.setList(viewStringSet.likelistSet(list));
+			
+			cvm = publicUtilityManageViewModel;
+			
+			
+			return "list";
+		 
 	}
 	 
 	 

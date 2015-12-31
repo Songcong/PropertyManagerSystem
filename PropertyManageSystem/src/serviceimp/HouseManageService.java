@@ -32,5 +32,8 @@ public class HouseManageService  implements IHouseManageService{
 	public void deletebyid(int id){
 		houseManageDao.deletebyid(id);
 	}
+	public List likeByProperty(String propertyName, Object value){
+		return houseManageDao.likeByProperty(propertyName, value);
+	}
 	
 }

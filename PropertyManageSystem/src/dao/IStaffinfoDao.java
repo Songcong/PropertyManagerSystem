@@ -9,4 +9,5 @@ public interface IStaffinfoDao {
 	public Staffinfo findById(java.lang.Integer id);
 	public List findAll();
 	public void deletebyid(int id);
+	public List likeByProperty(String propertyName, Object value);
 }

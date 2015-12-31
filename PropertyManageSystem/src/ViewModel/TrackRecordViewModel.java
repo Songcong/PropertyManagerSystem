@@ -7,6 +7,9 @@ public class TrackRecordViewModel {
 	
 	private String input;
 
+	public TrackRecordViewModel() {
+		this.viewClass=new ViewClass();
+	}
 	public ViewClass getViewClass() {
 		return viewClass;
 	}

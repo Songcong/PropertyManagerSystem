@@ -7,6 +7,9 @@ public ViewClass viewClass;
 	
 	private String input;
 
+	public OfforestViewModel() {
+		this.viewClass=new ViewClass();
+	}
 	public ViewClass getViewClass() {
 		return viewClass;
 	}

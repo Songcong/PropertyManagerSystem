@@ -28,6 +28,10 @@ public class OccupationAssign extends ActionSupport{
 	
 	 private String occupationId;
 	 
+	 private String propertyName;
+	 
+	 private String value;
+	 
 	 @Resource(name = "occupationService")
 	private IOccupationService occupationService;
 
@@ -48,7 +52,24 @@ public class OccupationAssign extends ActionSupport{
 	public void setOccupationId(String occupationId) {
 		this.occupationId = occupationId;
 	}
+	
+	
+	public String getPropertyName() {
+		return propertyName;
+	}
 
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
 	
 	
 	public String add(){
@@ -58,7 +79,7 @@ public class OccupationAssign extends ActionSupport{
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="occupationAction!add";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加职位信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加车辆信息</h2></div>";
 		 occupationViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(occupation);
@@ -80,7 +101,7 @@ public class OccupationAssign extends ActionSupport{
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="occupationAction!edit";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑岗位信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑车辆信息</h2></div>";
 		 occupationViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(occupation);
@@ -103,11 +124,27 @@ public class OccupationAssign extends ActionSupport{
 		 ViewStringSet viewStringSet = new ViewStringSet();
 			
 			occupationViewModel.setList(viewStringSet.listSet(list));
+			occupationViewModel.viewClass.setAdd("<a class=\"glyphicon glyphicon-plus\" href=\"occupationAssign!add\">增加记录</a>");
 			
 			cvm = occupationViewModel;
 			
 			
 			return "list";
+	}
+	
+	public String likelist() throws IllegalArgumentException, IllegalAccessException, IntrospectionException{
+		 OccupationViewModel occupationViewModel=new OccupationViewModel();
+		 list = occupationService.likeByProperty(propertyName, value);
+		 
+		 ViewStringSet viewStringSet = new ViewStringSet();
+			
+			occupationViewModel.setList(viewStringSet.likelistSet(list));
+			
+			cvm = occupationViewModel;
+			
+			
+			return "list";
+		 
 	}
 	 
 	 

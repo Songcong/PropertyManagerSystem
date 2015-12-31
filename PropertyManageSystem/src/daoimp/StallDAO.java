@@ -118,6 +118,21 @@ public class StallDAO implements IStallDao {
 		}
 	}
 
+	public List likeByProperty(String propertyName, Object value) {
+		log.debug("finding Stall instance with property: " + propertyName
+				+ ", value: " + value);
+		try {
+			String queryString = "from Stall as model where model."
+					+ propertyName + " like  '%"+value+"%'";
+			Query queryObject = getCurrentSession().createQuery(queryString);
+//			queryObject.setParameter(0, value);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
+			throw re;
+		}
+	}
+	
 	public List<Stall> findByLocation(Object location) {
 		return findByProperty(LOCATION, location);
 	}

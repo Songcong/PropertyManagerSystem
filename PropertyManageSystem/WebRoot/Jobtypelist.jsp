@@ -34,7 +34,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <script type="text/javascript" src="js/Prop.js"></script>
-  	<a href="jobtypeAssign!add">增加</a>
+  	${cvm.viewClass.add}
     ${cvm.list}
+    <script type="text/javascript">
+    function submitlike(){
+   		var propertyName = $('#propertyName').val();
+   		var value=$('#value').val();
+   		
+   		//alert("propertyName"+propertyName+"value"+value)
+   		/*$.ajax({
+		   		url: ${cvm.viewClass.action},
+		   		type: 'post',
+		   		data: {proertyName: propertyName,
+		   				value : value
+		   			  },
+		   		success:function(){*/
+   		$('#tables').load("jobtypeAssign!likelist",{"propertyName":propertyName,"value":value});
+   				//}
+   			  //})
+   			  
+   	}
+    </script>
   </body>
 </html>

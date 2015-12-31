@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import service.IExpensetypeService;
 import Model.Expensetype;
 import Utilx.ViewStringSet;
+import ViewModel.ExpensetypeViewModel;
 import ViewModel.ExpdetailViewModel;
 import ViewModel.ExpensetypeViewModel;
 import ViewModel.ViewClass;
@@ -39,11 +40,31 @@ public class ExpensetypeAssign extends ActionSupport{
 	 private String expenseId;
 	 
 	 private String str;
+	 private String propertyName;
+	 
+	 private String value;
 	 
 	 @Resource(name = "expensetypeService")
 	private IExpensetypeService expensetypeService;
 
 	private List list;
+	
+
+	public String getPropertyName() {
+		return propertyName;
+	}
+
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
 
 	public ExpensetypeViewModel getCvm() {
 		return cvm;
@@ -121,6 +142,7 @@ public class ExpensetypeAssign extends ActionSupport{
 		 ViewStringSet viewStringSet = new ViewStringSet();
 			
 			expensetypeViewModel.setList(viewStringSet.listSet(list));
+			expensetypeViewModel.viewClass.setAdd("<a class=\"glyphicon glyphicon-plus\" href=\"expensetypeAssign!add\">增加记录</a>");
 			
 			cvm = expensetypeViewModel;
 			
@@ -180,6 +202,20 @@ public class ExpensetypeAssign extends ActionSupport{
 		return "fkfind";
 		
 		
+	}
+	public String likelist() throws IllegalArgumentException, IllegalAccessException, IntrospectionException{
+		 ExpensetypeViewModel expensetypeViewModel=new ExpensetypeViewModel();
+		 list = expensetypeService.likeByProperty(propertyName, value);
+		 
+		 ViewStringSet viewStringSet = new ViewStringSet();
+			
+			expensetypeViewModel.setList(viewStringSet.likelistSet(list));
+			
+			cvm = expensetypeViewModel;
+			
+			
+			return "list";
+		 
 	}
 
 	

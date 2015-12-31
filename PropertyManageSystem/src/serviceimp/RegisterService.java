@@ -33,4 +33,7 @@ public class RegisterService implements IRegisterService {
 	public void deletebyid(int id){
 		userinfoDAO.deletebyid(id);
 	}
+	public List likeByProperty(String propertyName, Object value){
+		return userinfoDAO.likeByProperty(propertyName, value);
+	}
 }

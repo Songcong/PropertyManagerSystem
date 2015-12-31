@@ -120,6 +120,20 @@ public class CharstanDAO implements ICharstanDao {
 		}
 	}
 
+	public List likeByProperty(String propertyName, Object value) {
+		log.debug("finding Charstan instance with property: " + propertyName
+				+ ", value: " + value);
+		try {
+			String queryString = "from Charstan as model where model."
+					+ propertyName + " like '%"+value+"%'";
+			Query queryObject = getCurrentSession().createQuery(queryString);
+//			queryObject.setParameter(0, value);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
+			throw re;
+		}
+	}
 	public List<Charstan> findByExpdetailId(Object expdetailId) {
 		return findByProperty(EXPDETAIL_ID, expdetailId);
 	}

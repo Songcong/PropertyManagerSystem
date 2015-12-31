@@ -32,5 +32,8 @@ public class StallService  implements IStallService{
 	public void deletebyid(int id){
 		stallDao.deletebyid(id);
 	}
+	public List likeByProperty(String propertyName, Object value){
+		return stallDao.likeByProperty(propertyName, value);
+	}
 	
 }

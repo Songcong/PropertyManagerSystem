@@ -32,5 +32,8 @@ public class ForeignManageService  implements IForeignManageService{
 	public void deletebyid(int id){
 		foreignManageDao.deletebyid(id);
 	}
+	public List likeByProperty(String propertyName, Object value){
+		return foreignManageDao.likeByProperty(propertyName, value);
+	}
 	
 }

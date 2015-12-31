@@ -9,6 +9,9 @@ public class ExpdetailViewModel {
 	
 	private String input;
 
+	public ExpdetailViewModel() {
+		this.viewClass=new ViewClass();
+	}
 	public ViewClass getViewClass() {
 		return viewClass;
 	}

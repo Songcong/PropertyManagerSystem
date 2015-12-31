@@ -32,5 +32,7 @@ public class JobtypeService  implements IJobtypeService{
 	public void deletebyid(int id){
 		jobtypeDao.deletebyid(id);
 	}
-	
+	public List likeByProperty(String propertyName, Object value){
+		return jobtypeDao.likeByProperty(propertyName, value);
+	}
 }

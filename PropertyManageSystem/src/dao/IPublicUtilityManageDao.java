@@ -9,4 +9,5 @@ public interface IPublicUtilityManageDao {
 	public PublicUtilityManage findById(java.lang.Integer id);
 	public List findAll();
 	public void deletebyid(int id);
+	public List likeByProperty(String propertyName, Object value);
 }

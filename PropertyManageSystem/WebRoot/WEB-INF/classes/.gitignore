@@ -1,4 +1,11 @@
+/Anno/
+/Model/
+/Utilx/
+/ViewModel/
+/action/
+/applicationContext.xml
+/dao/
+/daoimp/
 /service/
 /serviceimp/
-/action/
-/Utilx/
+/struts.xml

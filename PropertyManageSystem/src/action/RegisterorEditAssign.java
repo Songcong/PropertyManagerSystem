@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import service.IRegisterService;
 import Model.Userinfo;
 import Utilx.ViewStringSet;
+import ViewModel.CarViewModel;
 import ViewModel.RegisterorEditViewModel;
 import ViewModel.ViewClass;
 
@@ -28,6 +29,25 @@ public class RegisterorEditAssign extends ActionSupport{
 	
 	@Resource(name="registerService")
 	private IRegisterService registerService;
+	private String propertyName;
+	 
+	 private String value;
+	public String getPropertyName() {
+		return propertyName;
+	}
+
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
 	public RegisterorEditViewModel getRevm() {
 		return revm;
 	}
@@ -95,5 +115,19 @@ public class RegisterorEditAssign extends ActionSupport{
 		  return "list";
 		  
 		  
+	}
+	public String likelist() throws IllegalArgumentException, IllegalAccessException, IntrospectionException{
+		RegisterorEditViewModel registerorEditViewModel = new RegisterorEditViewModel();
+		List list = registerService.likeByProperty(propertyName, value);
+		 
+		 ViewStringSet viewStringSet = new ViewStringSet();
+			
+		 registerorEditViewModel.setList(viewStringSet.likelistSet(list));
+			
+			revm = registerorEditViewModel;
+			
+			
+			return "list";
+		 
 	}
 }

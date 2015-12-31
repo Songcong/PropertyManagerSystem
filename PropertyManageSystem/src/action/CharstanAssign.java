@@ -3,13 +3,9 @@ package action;
 import java.beans.IntrospectionException;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.stereotype.Controller;
-
-import com.opensymphony.xwork2.ActionSupport;
 
 import service.ICharstanService;
 import Model.Charstan;
@@ -17,17 +13,24 @@ import Utilx.ViewStringSet;
 import ViewModel.CharstanViewModel;
 import ViewModel.ViewClass;
 
+import com.opensymphony.xwork2.ActionSupport;
+
+import javax.annotation.Resource;
 
 @Action (value="charstanAssign",results={
 		@Result(name="add",location="/Charstanaddoredit.jsp"),
 		@Result(name="edit",location="/Charstanaddoredit.jsp"),
 		@Result(name="list",location="/Charstanlist.jsp")})
 @Controller
-public class CharstanAssign extends ActionSupport {
+public class CharstanAssign extends ActionSupport{
 	
 	private CharstanViewModel cvm;
 	
-	 private String stanId;
+	 private String charstanId;
+	 
+	 private String propertyName;
+	 
+	 private String value;
 	 
 	 @Resource(name = "charstanService")
 	private ICharstanService charstanService;
@@ -42,7 +45,31 @@ public class CharstanAssign extends ActionSupport {
 		this.cvm = cvm;
 	}
 
+	public String getCharstanId() {
+		return charstanId;
+	}
 
+	public void setCharstanId(String charstanId) {
+		this.charstanId = charstanId;
+	}
+	
+	
+	public String getPropertyName() {
+		return propertyName;
+	}
+
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
 	
 	
 	public String add(){
@@ -52,7 +79,7 @@ public class CharstanAssign extends ActionSupport {
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="charstanAction!add";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加收费标准信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加车辆信息</h2></div>";
 		 charstanViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(charstan);
@@ -70,11 +97,11 @@ public class CharstanAssign extends ActionSupport {
 		
 		CharstanViewModel charstanViewModel=new CharstanViewModel();
 		
-		Charstan charstan = charstanService.edit(Integer.parseInt(stanId));
+		Charstan charstan = charstanService.edit(Integer.parseInt(charstanId));
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="charstanAction!edit";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑收费标准信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑车辆信息</h2></div>";
 		 charstanViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(charstan);
@@ -97,18 +124,30 @@ public class CharstanAssign extends ActionSupport {
 		 ViewStringSet viewStringSet = new ViewStringSet();
 			
 			charstanViewModel.setList(viewStringSet.listSet(list));
+			charstanViewModel.viewClass.setAdd("<a class=\"glyphicon glyphicon-plus\" href=\"charstanAssign!add\">增加记录</a>");
 			
 			cvm = charstanViewModel;
 			
 			
 			return "list";
 	}
-
-	public String getStanId() {
-		return stanId;
+	
+	public String likelist() throws IllegalArgumentException, IllegalAccessException, IntrospectionException{
+		 CharstanViewModel charstanViewModel=new CharstanViewModel();
+		 list = charstanService.likeByProperty(propertyName, value);
+		 
+		 ViewStringSet viewStringSet = new ViewStringSet();
+			
+			charstanViewModel.setList(viewStringSet.likelistSet(list));
+			
+			cvm = charstanViewModel;
+			
+			
+			return "list";
+		 
 	}
-
-	public void setStanId(String stanId) {
-		this.stanId = stanId;
-	}
+	 
+	 
+	 
+	 
 }

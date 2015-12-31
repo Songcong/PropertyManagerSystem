@@ -16,6 +16,7 @@ import service.IExpdetailService;
 import Model.Expdetail;
 import Utilx.ViewStringSet;
 import ViewModel.ExpdetailViewModel;
+import ViewModel.ExpdetailViewModel;
 import ViewModel.ViewClass;
 
 
@@ -36,6 +37,26 @@ public class ExpdetailAssign extends ActionSupport {
 	private IExpdetailService expdetailService;
 
 	private List list;
+	private String propertyName;
+	 
+	 private String value;
+	 
+
+	public String getPropertyName() {
+		return propertyName;
+	}
+
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
 
 	public ExpdetailViewModel getCvm() {
 		return cvm;
@@ -117,6 +138,7 @@ public class ExpdetailAssign extends ActionSupport {
 		 ViewStringSet viewStringSet = new ViewStringSet();
 			
 			expdetailViewModel.setList(viewStringSet.listSet(list));
+			expdetailViewModel.viewClass.setAdd("<a class=\"glyphicon glyphicon-plus\" href=\"expdetailAssign!add\">增加记录</a>");
 			
 			cvm = expdetailViewModel;
 			
@@ -136,5 +158,19 @@ public class ExpdetailAssign extends ActionSupport {
 		
 		return "list";
 		
+	}
+	public String likelist() throws IllegalArgumentException, IllegalAccessException, IntrospectionException{
+		 ExpdetailViewModel expdetailViewModel=new ExpdetailViewModel();
+		 list = expdetailService.likeByProperty(propertyName, value);
+		 
+		 ViewStringSet viewStringSet = new ViewStringSet();
+			
+			expdetailViewModel.setList(viewStringSet.likelistSet(list));
+			
+			cvm = expdetailViewModel;
+			
+			
+			return "list";
+		 
 	}
 }

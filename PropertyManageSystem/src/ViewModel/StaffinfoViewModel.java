@@ -1,11 +1,15 @@
 package ViewModel;
 
 public class StaffinfoViewModel {
-public ViewClass viewClass;
-	
+	public ViewClass viewClass;
+
 	private String list;
-	
+
 	private String input;
+
+	public StaffinfoViewModel() {
+		this.viewClass = new ViewClass();
+	}
 
 	public ViewClass getViewClass() {
 		return viewClass;

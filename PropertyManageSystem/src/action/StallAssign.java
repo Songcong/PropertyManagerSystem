@@ -28,6 +28,10 @@ public class StallAssign extends ActionSupport{
 	
 	 private String stallId;
 	 
+	 private String propertyName;
+	 
+	 private String value;
+	 
 	 @Resource(name = "stallService")
 	private IStallService stallService;
 
@@ -48,7 +52,24 @@ public class StallAssign extends ActionSupport{
 	public void setStallId(String stallId) {
 		this.stallId = stallId;
 	}
+	
+	
+	public String getPropertyName() {
+		return propertyName;
+	}
 
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
 	
 	
 	public String add(){
@@ -58,7 +79,7 @@ public class StallAssign extends ActionSupport{
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="stallAction!add";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加车位信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加车辆信息</h2></div>";
 		 stallViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(stall);
@@ -80,7 +101,7 @@ public class StallAssign extends ActionSupport{
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="stallAction!edit";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑车位信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑车辆信息</h2></div>";
 		 stallViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(stall);
@@ -103,11 +124,27 @@ public class StallAssign extends ActionSupport{
 		 ViewStringSet viewStringSet = new ViewStringSet();
 			
 			stallViewModel.setList(viewStringSet.listSet(list));
+			stallViewModel.viewClass.setAdd("<a class=\"glyphicon glyphicon-plus\" href=\"stallAssign!add\">增加记录</a>");
 			
 			cvm = stallViewModel;
 			
 			
 			return "list";
+	}
+	
+	public String likelist() throws IllegalArgumentException, IllegalAccessException, IntrospectionException{
+		 StallViewModel stallViewModel=new StallViewModel();
+		 list = stallService.likeByProperty(propertyName, value);
+		 
+		 ViewStringSet viewStringSet = new ViewStringSet();
+			
+			stallViewModel.setList(viewStringSet.likelistSet(list));
+			
+			cvm = stallViewModel;
+			
+			
+			return "list";
+		 
 	}
 	 
 	 

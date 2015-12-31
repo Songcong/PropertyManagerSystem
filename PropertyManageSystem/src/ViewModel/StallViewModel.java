@@ -8,6 +8,9 @@ public class StallViewModel {
 	
 	private String input;
 
+	public StallViewModel() {
+		this.viewClass=new ViewClass();
+	}
 	public ViewClass getViewClass() {
 		return viewClass;
 	}

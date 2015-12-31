@@ -33,4 +33,7 @@ public class OfforestService  implements IOfforestService{
 		offorestDao.deletebyid(id);
 	}
 	
+	public List likeByProperty(String propertyName, Object value){
+		return offorestDao.likeByProperty(propertyName, value);
+	}
 }

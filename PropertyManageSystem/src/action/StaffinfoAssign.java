@@ -26,8 +26,11 @@ public class StaffinfoAssign extends ActionSupport{
 	
 	private StaffinfoViewModel cvm;
 	
-	 private String staffId;
+	 private String staffinfoId;
 	 
+	 private String propertyName;
+	 
+	 private String value;
 	 
 	 @Resource(name = "staffinfoService")
 	private IStaffinfoService staffinfoService;
@@ -42,7 +45,31 @@ public class StaffinfoAssign extends ActionSupport{
 		this.cvm = cvm;
 	}
 
+	public String getStaffinfoId() {
+		return staffinfoId;
+	}
 
+	public void setStaffinfoId(String staffinfoId) {
+		this.staffinfoId = staffinfoId;
+	}
+	
+	
+	public String getPropertyName() {
+		return propertyName;
+	}
+
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
 	
 	
 	public String add(){
@@ -52,7 +79,7 @@ public class StaffinfoAssign extends ActionSupport{
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="staffinfoAction!add";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加职员信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加车辆信息</h2></div>";
 		 staffinfoViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(staffinfo);
@@ -70,11 +97,11 @@ public class StaffinfoAssign extends ActionSupport{
 		
 		StaffinfoViewModel staffinfoViewModel=new StaffinfoViewModel();
 		
-		Staffinfo staffinfo = staffinfoService.edit(Integer.parseInt(staffId));
+		Staffinfo staffinfo = staffinfoService.edit(Integer.parseInt(staffinfoId));
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="staffinfoAction!edit";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑职员信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑车辆信息</h2></div>";
 		 staffinfoViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(staffinfo);
@@ -97,19 +124,27 @@ public class StaffinfoAssign extends ActionSupport{
 		 ViewStringSet viewStringSet = new ViewStringSet();
 			
 			staffinfoViewModel.setList(viewStringSet.listSet(list));
+			staffinfoViewModel.viewClass.setAdd("<a class=\"glyphicon glyphicon-plus\" href=\"staffinfoAssign!add\">增加记录</a>");
 			
 			cvm = staffinfoViewModel;
 			
 			
 			return "list";
 	}
-
-	public String getStaffId() {
-		return staffId;
-	}
-
-	public void setStaffId(String staffId) {
-		this.staffId = staffId;
+	
+	public String likelist() throws IllegalArgumentException, IllegalAccessException, IntrospectionException{
+		 StaffinfoViewModel staffinfoViewModel=new StaffinfoViewModel();
+		 list = staffinfoService.likeByProperty(propertyName, value);
+		 
+		 ViewStringSet viewStringSet = new ViewStringSet();
+			
+			staffinfoViewModel.setList(viewStringSet.likelistSet(list));
+			
+			cvm = staffinfoViewModel;
+			
+			
+			return "list";
+		 
 	}
 	 
 	 

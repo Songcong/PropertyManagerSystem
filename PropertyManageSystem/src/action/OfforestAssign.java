@@ -26,7 +26,11 @@ public class OfforestAssign extends ActionSupport{
 	
 	private OfforestViewModel cvm;
 	
-	 private String afforestId;
+	 private String offorestId;
+	 
+	 private String propertyName;
+	 
+	 private String value;
 	 
 	 @Resource(name = "offorestService")
 	private IOfforestService offorestService;
@@ -41,7 +45,31 @@ public class OfforestAssign extends ActionSupport{
 		this.cvm = cvm;
 	}
 
+	public String getOfforestId() {
+		return offorestId;
+	}
 
+	public void setOfforestId(String offorestId) {
+		this.offorestId = offorestId;
+	}
+	
+	
+	public String getPropertyName() {
+		return propertyName;
+	}
+
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
 	
 	
 	public String add(){
@@ -51,7 +79,7 @@ public class OfforestAssign extends ActionSupport{
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="offorestAction!add";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加小区绿化信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加车辆信息</h2></div>";
 		 offorestViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(offorest);
@@ -69,11 +97,11 @@ public class OfforestAssign extends ActionSupport{
 		
 		OfforestViewModel offorestViewModel=new OfforestViewModel();
 		
-		Offorest offorest = offorestService.edit(Integer.parseInt(afforestId));
+		Offorest offorest = offorestService.edit(Integer.parseInt(offorestId));
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="offorestAction!edit";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑小区绿化信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑车辆信息</h2></div>";
 		 offorestViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(offorest);
@@ -96,19 +124,27 @@ public class OfforestAssign extends ActionSupport{
 		 ViewStringSet viewStringSet = new ViewStringSet();
 			
 			offorestViewModel.setList(viewStringSet.listSet(list));
+			offorestViewModel.viewClass.setAdd("<a class=\"glyphicon glyphicon-plus\" href=\"offorestAssign!add\">增加记录</a>");
 			
 			cvm = offorestViewModel;
 			
 			
 			return "list";
 	}
-
-	public String getAfforestId() {
-		return afforestId;
-	}
-
-	public void setAfforestId(String afforestId) {
-		this.afforestId = afforestId;
+	
+	public String likelist() throws IllegalArgumentException, IllegalAccessException, IntrospectionException{
+		 OfforestViewModel offorestViewModel=new OfforestViewModel();
+		 list = offorestService.likeByProperty(propertyName, value);
+		 
+		 ViewStringSet viewStringSet = new ViewStringSet();
+			
+			offorestViewModel.setList(viewStringSet.likelistSet(list));
+			
+			cvm = offorestViewModel;
+			
+			
+			return "list";
+		 
 	}
 	 
 	 

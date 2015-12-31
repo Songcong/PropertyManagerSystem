@@ -117,6 +117,21 @@ public class OfforestDAO implements IOfforestDao {
 		}
 	}
 
+	public List likeByProperty(String propertyName, Object value) {
+		log.debug("finding Offorest instance with property: " + propertyName
+				+ ", value: " + value);
+		try {
+			String queryString = "from Offorest as model where model."
+					+ propertyName + " like  '%"+value+"%'";
+			Query queryObject = getCurrentSession().createQuery(queryString);
+//			queryObject.setParameter(0, value);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
+			throw re;
+		}
+	}
+	
 	public List<Offorest> findByAfforestplace(Object afforestplace) {
 		return findByProperty(AFFORESTPLACE, afforestplace);
 	}

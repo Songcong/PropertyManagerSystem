@@ -33,4 +33,8 @@ public class StaffinfoService  implements IStaffinfoService{
 		staffinfoDao.deletebyid(id);
 	}
 	
+	public List likeByProperty(String propertyName, Object value){
+		return staffinfoDao.likeByProperty(propertyName, value);
+	}
+	
 }

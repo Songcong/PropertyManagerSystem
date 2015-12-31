@@ -26,7 +26,11 @@ public class TrackRecordAssign extends ActionSupport{
 	
 	private TrackRecordViewModel cvm;
 	
-	 private String recordId;
+	 private String trackRecordId;
+	 
+	 private String propertyName;
+	 
+	 private String value;
 	 
 	 @Resource(name = "trackRecordService")
 	private ITrackRecordService trackRecordService;
@@ -41,7 +45,31 @@ public class TrackRecordAssign extends ActionSupport{
 		this.cvm = cvm;
 	}
 
+	public String getTrackRecordId() {
+		return trackRecordId;
+	}
 
+	public void setTrackRecordId(String trackRecordId) {
+		this.trackRecordId = trackRecordId;
+	}
+	
+	
+	public String getPropertyName() {
+		return propertyName;
+	}
+
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
 	
 	
 	public String add(){
@@ -51,7 +79,7 @@ public class TrackRecordAssign extends ActionSupport{
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="trackRecordAction!add";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加业绩记录信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>添加车辆信息</h2></div>";
 		 trackRecordViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(trackRecord);
@@ -69,11 +97,11 @@ public class TrackRecordAssign extends ActionSupport{
 		
 		TrackRecordViewModel trackRecordViewModel=new TrackRecordViewModel();
 		
-		TrackRecord trackRecord = trackRecordService.edit(Integer.parseInt(recordId));
+		TrackRecord trackRecord = trackRecordService.edit(Integer.parseInt(trackRecordId));
 		
 		ViewClass vc=new ViewClass();
 		 vc.action="trackRecordAction!edit";
-		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑业绩记录信息</h2></div>";
+		 vc.message="<div class='col-md-6 col-md-offset-1'><h2>编辑车辆信息</h2></div>";
 		 trackRecordViewModel.viewClass=vc;
 		
 		ViewStringSet viewStringSet = new ViewStringSet(trackRecord);
@@ -96,19 +124,27 @@ public class TrackRecordAssign extends ActionSupport{
 		 ViewStringSet viewStringSet = new ViewStringSet();
 			
 			trackRecordViewModel.setList(viewStringSet.listSet(list));
+			trackRecordViewModel.viewClass.setAdd("<a class=\"glyphicon glyphicon-plus\" href=\"trackRecordAssign!add\">增加记录</a>");
 			
 			cvm = trackRecordViewModel;
 			
 			
 			return "list";
 	}
-
-	public String getRecordId() {
-		return recordId;
-	}
-
-	public void setRecordId(String recordId) {
-		this.recordId = recordId;
+	
+	public String likelist() throws IllegalArgumentException, IllegalAccessException, IntrospectionException{
+		 TrackRecordViewModel trackRecordViewModel=new TrackRecordViewModel();
+		 list = trackRecordService.likeByProperty(propertyName, value);
+		 
+		 ViewStringSet viewStringSet = new ViewStringSet();
+			
+			trackRecordViewModel.setList(viewStringSet.likelistSet(list));
+			
+			cvm = trackRecordViewModel;
+			
+			
+			return "list";
+		 
 	}
 	 
 	 

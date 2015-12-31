@@ -32,5 +32,8 @@ public class TrackRecordService  implements ITrackRecordService{
 	public void deletebyid(int id){
 		trackRecordDao.deletebyid(id);
 	}
+	public List likeByProperty(String propertyName, Object value){
+		return trackRecordDao.likeByProperty(propertyName, value);
+	}
 	
 }

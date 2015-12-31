@@ -33,4 +33,7 @@ public class FitmentService  implements IFitmentService{
 		fitmentDao.deletebyid(id);
 	}
 	
+	public List likeByProperty(String propertyName, Object value){
+		return fitmentDao.likeByProperty(propertyName, value);
+	}
 }

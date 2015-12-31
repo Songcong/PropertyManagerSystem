@@ -33,4 +33,7 @@ public class FamilyDetailService  implements IFamilyDetailService{
 		familyDetailDao.deletebyid(id);
 	}
 	
+	public List likeByProperty(String propertyName, Object value){
+		return familyDetailDao.likeByProperty(propertyName, value);
+	}
 }

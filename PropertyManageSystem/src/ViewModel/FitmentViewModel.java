@@ -7,6 +7,9 @@ public ViewClass viewClass;
 	
 	private String input;
 
+	public FitmentViewModel() {
+		this.viewClass=new ViewClass();
+	}
 	public ViewClass getViewClass() {
 		return viewClass;
 	}

@@ -32,5 +32,8 @@ public class UtilityDetailService  implements IUtilityDetailService{
 	public void deletebyid(int id){
 		utilityDetailDao.deletebyid(id);
 	}
+	public List likeByProperty(String propertyName, Object value){
+		return utilityDetailDao.likeByProperty(propertyName, value);
+	}
 	
 }

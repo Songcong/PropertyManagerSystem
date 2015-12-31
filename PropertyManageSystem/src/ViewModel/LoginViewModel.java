@@ -32,11 +32,15 @@ public class LoginViewModel {
 	private String userid;
 	private String username;
 	private String password;
+	
+	
+	
 	public String getUserid() {
 		return userid;
 	}
 
 
+	
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}

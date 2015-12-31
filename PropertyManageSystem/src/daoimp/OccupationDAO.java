@@ -118,6 +118,20 @@ public class OccupationDAO implements IOccupationDao {
 		}
 	}
 
+	public List likeByProperty(String propertyName, Object value) {
+		log.debug("finding Occupation instance with property: " + propertyName
+				+ ", value: " + value);
+		try {
+			String queryString = "from Occupation as model where model."
+					+ propertyName + " like '%"+value+"%'";
+			Query queryObject = getCurrentSession().createQuery(queryString);
+//			queryObject.setParameter(0, value);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
+			throw re;
+		}
+	}
 	public List<Occupation> findByOccupationname(Object occupationname) {
 		return findByProperty(OCCUPATIONNAME, occupationname);
 	}

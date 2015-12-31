@@ -33,4 +33,7 @@ public class ChartService  implements IChartService{
 		chartDao.deletebyid(id);
 	}
 	
+	public List likeByProperty(String propertyName, Object value){
+		return chartDao.likeByProperty(propertyName, value);
+	}
 }

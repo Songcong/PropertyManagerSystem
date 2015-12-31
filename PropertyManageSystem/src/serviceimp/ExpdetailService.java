@@ -29,4 +29,7 @@ public class ExpdetailService implements IExpdetailService {
 	public void deletebyid(int id){
 		expdetailDAO.deletebyid(id);
 	}
+	public List likeByProperty(String propertyName, Object value){
+		return expdetailDAO.likeByProperty(propertyName, value);
+	}
 }

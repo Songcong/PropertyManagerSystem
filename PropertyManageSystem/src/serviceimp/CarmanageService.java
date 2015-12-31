@@ -32,4 +32,7 @@ public class CarmanageService  implements ICarmanageService{
 	public void deletebyid(int id){
 		carmanageDAO.deletebyid(id);
 	}
+	public List likeByProperty(String propertyName, Object value){
+		return carmanageDAO.likeByProperty(propertyName, value);
+	}
 }

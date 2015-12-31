@@ -9,4 +9,5 @@ public interface IJobtypeService {
 	public Jobtype edit(int id);
 	public List findall();
 	public void deletebyid(int id);
+	public List likeByProperty(String propertyName, Object value);
 }

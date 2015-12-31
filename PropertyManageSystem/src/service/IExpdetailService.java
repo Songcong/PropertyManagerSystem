@@ -10,4 +10,5 @@ public interface IExpdetailService {
 	public Expdetail edit(int id);
 	public List findall();
 	public void deletebyid(int id);
+	public List likeByProperty(String propertyName, Object value);
 }

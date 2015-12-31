@@ -124,6 +124,21 @@ public class ExpdetailDAO implements IExpdetailDao {
 		}
 	}
 
+	public List likeByProperty(String propertyName, Object value) {
+		log.debug("finding Expdetail instance with property: " + propertyName
+				+ ", value: " + value);
+		try {
+			String queryString = "from Expdetail as model where model."
+					+ propertyName + " like '%"+value+"%'";
+			Query queryObject = getCurrentSession().createQuery(queryString);
+//			queryObject.setParameter(0, value);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
+			throw re;
+		}
+	}
+	
 	public List<Expdetail> findByExpenseid(Object expenseid) {
 		return findByProperty(EXPENSEID, expenseid);
 	}

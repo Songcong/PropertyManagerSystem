@@ -9,4 +9,5 @@ public interface IRegisterService {
 	public Userinfo edit(int id);
 	public List<Userinfo> findall();
 	public void deletebyid(int id);
+	public List likeByProperty(String propertyName, Object value);
 }
